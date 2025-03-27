@@ -26,26 +26,27 @@ SCHEMA=$(cat "$schemaFile")
 
 # Help Menu
 show_help() {
-    echo ""
-    echo "🆘 Available Commands:"
-    echo "  🔎 [endpoint path]            → Check required privileges for a specific endpoint (e.g. /v1/computers-inventory)"
-    echo "  📄 list or -l                 → Show all API endpoints"
-    echo "  💻 list computers or -lc      → Show only computer-related endpoints"
-    echo "  📱 list mobile or -lm         → Show only mobile device-related endpoints"
-    echo "  🔁 refresh or -r              → Manually refresh the local cached schema"
-    echo "  ❓ help or -h                 → Show this help message"
-    echo "  🚪 quit or -q                 → Exit the script"
-    echo ""
+  echo ""
+  echo "🆘 Commands:"
+  echo "  [endpoint path]         → Check required privileges for a specific endpoint (e.g. /v1/computers-inventory)"
+  echo "  list or -l              → Show all API endpoints"
+  echo "  list computers or -lc   → Show computer-related endpoints"
+  echo "  list mobile or -lm      → Show mobile device-related endpoints"
+  echo "  list user or -lu        → Show mobile device-related endpoints"
+  echo "  refresh or -r           → Refresh the cached schema file"
+  echo "  help or -h              → Show this help menu"
+  echo "  quit or -q              → Exit"
+  echo ""
 }
 
 echo ""
 echo "📘 Jamf Pro API Privilege Checker"
-echo "💡 Type 'help' or '-h' for available options"
+echo "💡 Type a command or endpoint. Use 'help' for options."
 echo ""
 
 while true; do
-    echo -n "Enter the full API endpoint path (e.g., /v1/computers-inventory) to check required privileges:"
-    read INPUT
+  echo -n "🧭 What would you like to do? "
+  read INPUT
 
     # Normalize input
     INPUT_LOWER=$(echo "$INPUT" | tr '[:upper:]' '[:lower:]')
@@ -83,6 +84,13 @@ while true; do
             echo ""
             echo "📱 Mobile Device-related Endpoints:"
             echo "$SCHEMA" | jq -r '.paths | keys[]' | grep -i "/mobile" | sort
+            echo ""
+            ;;
+          
+        "list user"|-lu)
+            echo ""
+            echo "👤 User-related Endpoints:"
+            echo "$SCHEMA" | jq -r '.paths | keys[]' | grep -i "/user" | sort
             echo ""
             ;;
 

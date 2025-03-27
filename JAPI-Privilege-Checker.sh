@@ -1,15 +1,27 @@
 #!/bin/zsh
 
-url="https://overview.jamfcloud.com"
+#If ran from MacOS will check current enrollment URL as well as binary version on machine. This should match server it is enrolled to and serve as a reference point for future schema updates
+#Comment out lines 5-15 and uncomment line 17 if you want to set manual server path
+getUrl=$(jamf checkJSSConnection | awk '{print $4}')
+url=$(echo $getUrl | sed 's/... available.//g')
+if [[ $url = "" ]]; then
+  echo "No URL found, reverting to sample server"
+  #Demo server
+  url="https://overview.jamfcloud.com"
+fi
+#variables to pull jamf binary version and label .json file appropriately. Will auto download new schema on server upgrade
+getBinaryVersion=$(jamf about | awk 'NR==4' | awk '{print $2}')
 schemaDir="$HOME/Documents/api_schema"
-schemaFile="$schemaDir/schema.json"
+schemaFile="$schemaDir/schema_$getBinaryVersion.json"
+
+#url="https://yourserver.jamfcloud.com"
 
 # Create schema directory if it doesn't exist
 mkdir -p "$schemaDir"
 
 # Function to download latest schema
 download_schema() {
-    echo "🌐 Downloading latest API schema..."
+    echo "🌐 Downloading latest API schema for Jamf Pro version $getBinaryVersion"
     curl -s "$url/api/schema" -o "$schemaFile"
     echo "✅ Schema saved to $schemaFile"
 }

@@ -12,7 +12,7 @@ echo -n "🔎 Enter the full API endpoint path you'd like to check: "
 read ENDPOINT
 
 # Fetch the OpenAPI schema
-echo "📡 Fetching schema from: $url/api/schema"
+echo "📡 Checking required privileges for: $ENDPOINT"
 SCHEMA=$(curl -s "$url/api/schema")
 
 # Extract required privileges

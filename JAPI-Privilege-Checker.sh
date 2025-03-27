@@ -44,7 +44,7 @@ echo "💡 Type 'help' or '-h' for available options"
 echo ""
 
 while true; do
-    echo -n "🔎 Type the full path of an endpoint to see its required privliges: "
+    echo -n "Enter the full API endpoint path (e.g., /v1/computers-inventory) to check required privileges:"
     read INPUT
 
     # Normalize input
@@ -114,8 +114,9 @@ while true; do
             ;;
 
         *)
-            echo "❌ Unknown command: $INPUT"
-            echo "Type 'help' or '-h' to see available options."
+            echo ""
+            echo "❌ Unknown command. Type 'help' or '-h' for available options"
+            echo ""
             ;;
     esac
 done

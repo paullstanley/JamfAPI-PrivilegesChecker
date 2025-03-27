@@ -2,11 +2,9 @@
 
 # Currently it uses Bearer Token Authentication using Basic Authentication. It is required that Basic Authentication be enabled in the Password Policy setting of the Jamf User being used.
 
-
 # ========== USER CONFIGURABLE ==========
 url="https://<YOUR INSTANCE NAME HERE>.jamfcloud.com"
 # =======================================
-
 
 echo ""
 echo "📘 This script checks the required privileges for a specific Jamf Pro API endpoint."

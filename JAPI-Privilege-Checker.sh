@@ -2,15 +2,15 @@
 
 url="https://overview.jamfcloud.com"
 
+# Fetch schema once and reuse
+SCHEMA=$(curl -s "$url/api/schema")
+
 echo ""
 echo "📘 This script checks the required privileges for a specific Jamf Pro API endpoint."
 echo "👉 Type the full path of the endpoint (e.g., /v1/computers-inventory)"
 echo "💡 Or type 'list' to view all available endpoints"
 echo "✅ Type 'done' when you're finished"
 echo ""
-
-# Fetch schema once and reuse
-SCHEMA=$(curl -s "$url/api/schema")
 
 while true; do
     echo -n "🔎 What would you like to do? (enter endpoint, 'list', or 'done'): "

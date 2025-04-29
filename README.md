@@ -1,25 +1,54 @@
 # JamfAPI-PrivilegesChecker
 
-**JamfAPI-PrivilegesChecker** is a Bash script designed to connect to a Jamf Pro server and retrieve a user's privileges and permissions via the Jamf Pro API.  
-It provides a quick and easy way for Jamf administrators to audit and validate user access rights.
+JamfAPI-PrivilegesChecker is a lightweight macOS SwiftUI app that allows Jamf administrators and developers to quickly check the API privileges associated with their Jamf Pro API credentials.
 
 ## Features
 
-- Connects securely to the Jamf Pro API
-- Retrieves and displays all privileges associated with an API user
-- Assists in troubleshooting permission issues
-- Lightweight and fast command-line tool
-- No external dependencies beyond `curl` and `jq`
+- Authenticate against your Jamf Pro instance using Client ID and Secret.
+- Retrieve and display user privileges via the `/api/v1/auth/privileges` endpoint.
+- Secure credential handling with SwiftUI SecureFields.
+- Minimal, user-friendly interface.
 
-## Technologies
+## Requirements
 
-- Bash
-- cURL
-- jq (for parsing JSON responses)
-- Jamf Pro API
+- macOS 13 or later
+- Xcode 15 or later
+- Jamf Pro API Client ID and Secret
+- Access to the Jamf Pro API
 
-## Installation
+## Setup
 
 1. Clone the repository:
    ```bash
    git clone https://github.com/paullstanley/JamfAPI-PrivilegesChecker.git
+   cd JamfAPI-PrivilegesChecker
+   ```
+
+2. Open the project in Xcode:
+   - Open `JamfAPI-PrivilegesChecker.xcodeproj`.
+
+3. Update the Jamf URL (if necessary) to point to your environment.
+
+4. Build and run the app.
+
+## Usage
+
+1. Launch the app.
+2. Enter your:
+   - Jamf Pro URL (e.g., `https://yourcompany.jamfcloud.com`)
+   - Client ID
+   - Client Secret
+3. Click **Authenticate** to retrieve your API privileges.
+
+## Notes
+
+- Authentication uses OAuth2 Client Credentials flow.
+- No credentials are stored locally; they are only used during the session.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Author
+
+Created by [Paull Stanley](https://github.com/paullstanley).

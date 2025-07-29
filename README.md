@@ -27,7 +27,7 @@
 
 2. (Optional) Make the script executable:
    ```bash
-   chmod +x check-privileges.zsh
+   chmod +x JAPI-Privilege-Checker.sh
    ```
 
 ## Usage
@@ -36,14 +36,14 @@
 
 Run the script directly from your terminal:
 ```bash
-./check-privileges.zsh
+./JAPI-Privilege-Checker.sh
 ```
 
 ### Method 2: Using Zsh Explicitly
 
 If the script doesn’t have a shebang (`#!/bin/zsh`), or you want to be explicit:
 ```bash
-zsh check-privileges.zsh
+zsh JAPI-Privilege-Checker.sh
 ```
 
 ### Method 3: From a `.sh` Wrapper Script
@@ -52,7 +52,7 @@ If you’d prefer to invoke the script from a `.sh` shell wrapper, you can creat
 
 ```bash
 #!/bin/bash
-zsh ./check-privileges.zsh
+zsh ./JAPI-Privilege-Checker.sh
 ```
 
 Save this as `run.sh`, then make it executable and run it:

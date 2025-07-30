@@ -18,6 +18,7 @@
 - `curl` (pre-installed on macOS)
 - [`jq`](https://stedolan.github.io/jq/) (install via [Homebrew](https://brew.sh) if not already installed)
 - A Mac enrolled in Jamf Pro (or configure a Jamf Pro URL manually)
+- Must be ran with elevated privileges in order to cache the schema to a local file saved in ~/Documents/api_schema
 
 ## Setup
 
@@ -38,29 +39,14 @@
 
 Run the script directly from your terminal:
 ```bash
-./JAPI-Privilege-Checker.sh
+sudo bash JAPI-Privilege-Checker.sh
 ```
 
 ### Method 2: Using Zsh Explicitly
 
 If the script doesn’t have a shebang (`#!/bin/zsh`), or you want to be explicit:
 ```bash
-zsh JAPI-Privilege-Checker.sh
-```
-
-### Method 3: From a `.sh` Wrapper Script
-
-If you’d prefer to invoke the script from a `.sh` shell wrapper, you can create a file like this:
-
-```bash
-#!/bin/bash
-zsh ./JAPI-Privilege-Checker.sh
-```
-
-Save this as `run.sh`, then make it executable and run it:
-```bash
-chmod +x run.sh
-./run.sh
+sudo zsh JAPI-Privilege-Checker.sh
 ```
 
 ## Commands

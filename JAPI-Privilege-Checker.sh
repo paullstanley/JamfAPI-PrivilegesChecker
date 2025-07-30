@@ -22,7 +22,7 @@ mkdir -p "$schemaDir"
 # Function to download latest schema
 download_schema() {
     echo "🌐 Downloading latest API schema for Jamf Pro version $getBinaryVersion"
-    curl -s "$url/api/schema" -o "$schemaFile"
+    sudo curl -s "$url/api/schema" -o "$schemaFile"
     echo "✅ Schema saved to $schemaFile"
 }
 

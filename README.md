@@ -4,10 +4,12 @@
 
 ## Features
 
-- Authenticate against your Jamf Pro instance using a Client ID and Secret.
-- Retrieve and display user privileges via the `/api/v1/auth/privileges` endpoint.
-- Secure, session-based handling of credentials.
-- Minimal and fast CLI utility.
+- Automatically detect the enrolled Jamf Pro server and local binary version.
+- Retrieve and locally cache the Jamf Pro OpenAPI schema (`/api/schema`).
+- Inspect required privileges for specific endpoints using schema metadata.
+- List all API endpoints, or filter by computers, mobile devices, or user-related APIs.
+- Refresh the local schema cache when the Jamf Pro server is updated.
+- CLI-based, fast, and minimal; built using standard macOS tools.
 
 ## Requirements
 
@@ -15,7 +17,7 @@
 - Zsh (default on modern macOS versions)
 - `curl` (pre-installed on macOS)
 - [`jq`](https://stedolan.github.io/jq/) (install via [Homebrew](https://brew.sh) if not already installed)
-- Jamf Pro API Client ID and Secret
+- A Mac enrolled in Jamf Pro (or configure a Jamf Pro URL manually)
 
 ## Setup
 
@@ -61,32 +63,33 @@ chmod +x run.sh
 ./run.sh
 ```
 
-## Prompts
+## Commands
 
-The script will ask you to enter:
-- **Jamf Pro URL** (e.g., `https://yourcompany.jamfcloud.com`)
-- **Client ID**
-- **Client Secret**
+Once running, the script supports the following commands:
+- /your/endpoint/path → Display required privileges for a specific endpoint.
+- list or -l → Show all API endpoints.
+- list computers or -lc → Show computer-related endpoints.
+- list mobile or -lm → Show mobile device-related endpoints.
+- list user or -lu → Show user-related endpoints.
+- refresh or -r → Refresh the cached schema file.
+- help or -h → Show the help menu.
+- quit or -q → Exit the script.
 
-It will then authenticate and display your API privileges.
 
-### Example Output
+### Behavior
 
-```json
-{
-  "privileges": [
-    "Auditor.Read",
-    "Enrollment.View",
-    "Inventory.Read"
-  ]
-}
-```
+- The script attempts to detect the enrolled Jamf Pro server and current Jamf binary version.
+- If no enrollment URL is detected, it defaults to https://overview.jamfcloud.com.
+- Schema files are saved to ~/Documents/api_schema/ and named by Jamf Pro version.
+- The script avoids re-downloading the schema if the correct version is already cached.
+- All privilege data is derived from the x-required-privileges field in the OpenAPI schema.
 
 ## Notes
 
-- Authentication uses the OAuth2 Client Credentials flow.
-- No credentials are stored locally; they are used only for the current session.
-- Ensure your Client ID has permission to access the `/api/v1/auth/privileges` endpoint.
+- This script does not perform authentication using a Client ID or Secret.
+- It does not query the /api/v1/auth/privileges endpoint.
+- No credentials are collected, stored, or transmitted.
+- Intended for reference and exploration of Jamf Pro API schema structure and privilege requirements.
 
 ## License
 
